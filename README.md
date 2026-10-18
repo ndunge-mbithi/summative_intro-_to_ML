@@ -4,7 +4,6 @@
 
 Author: Ndunge Mutheu Mbithi (BSc Software Engineering, African Leadership University)
 
-> **Scope.** This is a population-health screening research project. The models are not clinically validated diagnostic systems and must not be used to make individual medical decisions.
 
 ## Overview
 
