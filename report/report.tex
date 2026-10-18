@@ -1,0 +1,76 @@
+\documentclass[10pt,twocolumn,letterpaper]{article}
+% IEEE conference-style layout built from standard packages (IEEEtran.cls was not
+% available offline): Times text, 0.75in margins, Roman-numbered small-caps sections.
+\usepackage[margin=0.75in,columnsep=0.25in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{mathptmx}
+\usepackage{microtype}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{float}
+\usepackage[font=footnotesize,labelfont=bf]{caption}
+\usepackage{cite}
+\usepackage{url}
+\usepackage[hidelinks]{hyperref}
+\usepackage{titlesec}
+\usepackage{balance}
+\usepackage{amsmath}
+
+% ---- Deliverable links: fill in once each link exists and has been opened to verify it.
+\def\GitHubURL{https://github.com/ndunge-mbithi/summative_intro-_to_ML}
+\def\DriveURL{}
+\def\VideoURL{}
+\newcommand{\showlink}[2]{\ifx#1\empty\textit{#2}\else\url{#1}\fi}
+
+\renewcommand{\thesection}{\arabic{section}}
+\renewcommand{\thesubsection}{\arabic{section}.\arabic{subsection}}
+\titleformat{\section}{\normalfont\bfseries\centering}{\thesection.}{0.5em}{}
+\titleformat{\subsection}{\normalfont\itshape}{\thesubsection.}{0.5em}{}
+\titlespacing*{\section}{0pt}{1.2ex plus .5ex}{0.8ex}
+\titlespacing*{\subsection}{0pt}{1ex plus .4ex}{0.4ex}
+\setlength{\parskip}{0pt}
+\graphicspath{{../reports/figures/}}
+
+\title{\vspace{-1.5em}\Large Predicting Diabetes Status from Population Health Indicators Using Traditional Machine Learning and Deep Learning}
+\author{Ndunge Mutheu Mbithi\\
+\small BSc Software Engineering, African Leadership University}
+\date{}
+
+\begin{document}
+\twocolumn[
+\begin{@twocolumnfalse}
+\maketitle
+\vspace{-2.5em}
+\begin{center}
+\small
+\begin{tabular}{@{}ll@{}}
+\textbf{GitHub repository:} & \showlink{\GitHubURL}{GitHub repository}\\
+\textbf{Google Drive folder:} & \showlink{\DriveURL}{[link pending --- folder not yet created]}\\
+\textbf{Video presentation:} & \showlink{\VideoURL}{[link pending --- video not yet recorded]}\\
+\end{tabular}
+\end{center}
+\input{sections/00_abstract}
+\vspace{1em}
+\end{@twocolumnfalse}
+]
+
+\input{sections/01_introduction}
+\input{sections/02_literature}
+\input{sections/03_methodology}
+\input{sections/04_results}
+\input{sections/05_discussion}
+\input{sections/06_conclusion}
+
+\balance
+\begin{thebibliography}{99}
+\footnotesize
+\input{references_ordered}
+\end{thebibliography}
+
+\onecolumn
+\appendix
+\input{sections/07_appendix}
+
+\end{document}

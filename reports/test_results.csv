@@ -1,0 +1,4 @@
+,accuracy,balanced_accuracy,precision_macro,recall_macro,f1_macro,roc_auc_ovr_macro,avg_precision_macro,recall_prediabetes,precision_prediabetes,recall_diabetes,precision_diabetes,weighted_f1_macro,weighted_roc_auc,weighted_recall_diabetes
+E01 Logistic regression,0.8053,0.4803,0.4516,0.4803,0.4624,0.7942,0.469,0.0719,0.0437,0.5024,0.3942,0.4778,0.8226,0.4692
+E07 Gradient boosting (tuned),0.7959,0.498,0.4561,0.498,0.4688,0.8011,0.4792,0.0997,0.0416,0.5462,0.4007,0.4825,0.83,0.5159
+E17 Functional wide-and-deep + engineered,0.8237,0.4759,0.4621,0.4759,0.4683,0.8004,0.4779,0.0555,0.0531,0.4806,0.4208,0.481,0.8259,0.4575

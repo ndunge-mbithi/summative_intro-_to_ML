@@ -1,0 +1,4 @@
+,threshold,sensitivity,specificity,ppv,npv,f2,flag_rate
+default_0.5,0.5,0.168,0.982,0.581,0.888,0.195,0.038
+F2_threshold,0.117,0.84,0.688,0.287,0.966,0.606,0.381
+F2_threshold_survey_weighted,0.117,0.804,0.772,0.292,0.971,0.595,0.289

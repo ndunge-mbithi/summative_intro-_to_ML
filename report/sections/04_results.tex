@@ -1,0 +1,35 @@
+\section{Results}
+\label{sec:results}
+
+\subsection{Dataset and class distribution}
+The codebook-verified BRFSS 2015 file contains 441,456 records. After removing 798 records with unusable target labels, the analysis sample contains 440,658 respondents and 25 candidate indicators. Unweighted class proportions are 85.26\% no diabetes, 1.75\% prediabetes and 12.99\% diabetes; survey-weighted diabetes prevalence is 10.5\%. Income is the most frequently missing predictor (17.97\%). Missing predictors are retained through pipeline imputation rather than complete-case deletion. The analysis is based on self-reported diagnosis, not laboratory-confirmed glycaemia.
+
+\input{tables/experiments}
+
+\subsection{Validation experiments}
+The 17 experiment outputs from the latest notebook execution are summarised in Table~\ref{tab:experiments}. Logistic regression (E01) establishes a validation macro average precision (AP) of 0.4704. Removing scaling (E02) makes optimisation slower and less effective. Class weighting (E03) increases minority-class recall but shifts the decision boundary and lowers accuracy. The random-forest baseline (E04) reaches macro AP 0.4780; baseline gradient boosting (E05) reaches 0.4796. Adding six engineered features (E06) changes AP only slightly (0.4794), so feature engineering does not materially improve this tree-based baseline.
+
+The randomized searches are run within the training split. For gradient boosting, the best candidate uses learning rate 0.03629, 587 iterations, 16 leaf nodes, 73 minimum samples per leaf and L2 regularisation 4.33792. The search's top candidates are tightly clustered in cross-validation AP (about 0.475), and the selected refit E07 obtains validation AP 0.4812 and macro ROC-AUC 0.7955. The tuned random forest (E09) reaches validation AP 0.4782 and macro ROC-AUC 0.7921. The latest execution records 17 experiments and selects E07 among traditional models and E17 among deep-learning models by validation macro AP.
+
+The Sequential networks vary capacity, learning rate, batch size and class weighting. The Functional wide-and-deep network is E16; E17 adds engineered features. Their validation macro APs are 0.4798 and 0.4799 respectively, making E17 the selected deep model in this execution, though the difference is negligible. Across unweighted model families, validation macro AP remains close, while class weighting primarily changes class decisions rather than improving probability ranking. Appendix~\ref{app:configs} and the notebook's experiment log provide the experiment settings and run tracking.
+
+\subsection{Held-out test evaluation}
+The selected traditional model E07, selected deep model E17, and interpretable logistic reference E01 are evaluated on the same held-out test set of 66,099 respondents. The fresh notebook output is reproduced in Table~\ref{tab:test}. E07 has macro ROC-AUC 0.8011 and macro AP 0.4792; E17 has macro ROC-AUC 0.8004 and macro AP 0.4779; E01 has macro ROC-AUC 0.7942 and macro AP 0.4690. E07's diabetes recall is 0.5462, compared with 0.4806 for E17 and 0.5024 for E01. These values supersede the earlier report's E16 selection and test metrics.
+
+\input{tables/test}
+
+The class-wise outputs show that prediabetes remains the weakest class: E07 recall is 0.100 and precision is 0.042, while its diabetes recall is 0.546 and precision is 0.401. Its diabetes-versus-rest ROC-AUC is 0.843 and average precision is 0.434, against a 0.130 prevalence baseline. Prediabetes average precision is approximately 0.036 against a 0.017 baseline. Macro averages therefore describe a task where the dominant no-diabetes class is much easier than either minority class.
+
+\subsection{Screening threshold and error analysis}
+For a binary screening view, the validation-selected F2 threshold in the latest execution is 0.117. On the test set it gives sensitivity 0.840, specificity 0.688, PPV 0.287, NPV 0.966 and a flag rate of 0.381. The default 0.5 threshold instead has sensitivity 0.168 and flags 0.038 of respondents. The weighted screening row reports sensitivity 0.804 and flag rate 0.289. This is a trade-off, not a universally optimal clinical operating point: the high-sensitivity threshold sends over one third of respondents for follow-up, and fewer than three in ten flags are true reported cases.
+
+\input{tables/screening}
+
+The latest error-profile output shows detected diabetes cases are older (mean age 66.18) and have higher BMI (33.92) and more cardiometabolic conditions (2.28) than missed cases (age 62.42, BMI 28.83, count 1.23). Among true prediabetes respondents, 52.9\% are assigned to no diabetes, 37.1\% to diabetes and 10.0\% to prediabetes. The classifier therefore tends to place prediabetes between its adjacent classes rather than identify it as a separate group.
+
+\subsection{Explanations and subgroup results}
+Permutation importance from the latest run ranks BMI (macro-AP decrease 0.0343), self-rated general health (0.0292), age (0.0164), high blood pressure (0.0112) and high cholesterol (0.0084) highest. SHAP on transformed features instead ranks general health (mean absolute value 0.3088), cardiometabolic count (0.2495), age-by-BMI (0.2195) and check-up recency (0.1607). These rankings differ because correlated and engineered features share attribution. Logistic regression coefficients provide a complementary directional view; poorer general health, age, BMI and high blood pressure are associated with higher predicted diabetes odds. These are predictive associations, not causal effects.
+
+\input{tables/subgroups}
+
+The updated subgroup table shows diabetes recall of 0.533 for women and 0.563 for men. Recall is 0.227 among ages 18--44, 0.521 among ages 45--64 and 0.600 among ages 65+. By race/ethnicity, recall ranges from 0.472 for Other non-Hispanic respondents to 0.594 for Black non-Hispanic respondents; the respective AUCs are 0.869 and 0.813. The latest outputs show substantial differences by age and other strata under a common rule. These are descriptive findings; they do not establish the cause of disparities or fairness on their own.

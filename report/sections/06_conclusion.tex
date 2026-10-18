@@ -1,0 +1,6 @@
+\section{Conclusion}
+\label{sec:conclusion}
+
+I compared traditional machine learning and TensorFlow/Keras models for classifying no diabetes, prediabetes and diabetes from 25 indicators in 440,658 labelled respondents from BRFSS 2015. In the latest notebook execution, tuned gradient boosting (E07) is the selected traditional model and Functional wide-and-deep with engineered features (E17) is the selected deep model. On the held-out test set, E07 reaches macro ROC-AUC 0.8011 and macro AP 0.4792; E17 reaches 0.8004 and 0.4779. Logistic regression remains close and easier to interpret. Prediabetes is poorly distinguished, while the diabetes screening threshold trades a sensitivity of 0.840 for a flag rate of 0.381.
+
+The main lesson is that the operating threshold, outcome quality and population fit matter at least as much as model family. These self-reported US survey labels cannot identify undiagnosed diabetes reliably and the subgroup results show that a single rule does not perform equally across groups. The model is a research exercise, not a diagnostic system. Before considering a screening application in sub-Saharan Africa, I would collect laboratory-confirmed local data, assess calibration and survey-aware performance, and set referral thresholds with clinics according to their confirmatory-testing capacity.

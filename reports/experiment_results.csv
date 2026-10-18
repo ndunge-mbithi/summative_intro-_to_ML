@@ -1,0 +1,18 @@
+experiment_id,model,features,imbalance_strategy,train_seconds,accuracy,balanced_accuracy,f1_macro,roc_auc_ovr_macro,avg_precision_macro,ap_prediabetes,ap_diabetes,recall_prediabetes,recall_diabetes
+E01,Logistic regression,base (25),none,7.55,0.8576,0.3861,0.3974,0.7887,0.4704,0.0351,0.4126,0.0,0.18
+E02,Logistic regression (unscaled),base (25),none,41.75,0.8559,0.3761,0.3838,0.7689,0.463,0.0298,0.3992,0.0,0.1469
+E03,Logistic regression (balanced),base (25),class_weight=balanced,7.33,0.6449,0.5191,0.423,0.7783,0.4658,0.0322,0.4018,0.3096,0.5873
+E04,Random forest,base (25),none,106.85,0.8604,0.3768,0.3854,0.7862,0.478,0.033,0.437,0.0,0.1432
+E05,Gradient boosting,base (25),none,61.9,0.8604,0.3922,0.4056,0.7927,0.4796,0.0357,0.4384,0.0,0.1975
+E06,Gradient boosting + engineered,base+engineered (31),none,74.64,0.8609,0.3927,0.4067,0.7923,0.4794,0.0346,0.4388,0.0009,0.1977
+E07,Gradient boosting (tuned),base+engineered (31),none,215.47,0.8615,0.393,0.407,0.7955,0.4812,0.0358,0.4424,0.0,0.199
+E08,"Gradient boosting (tuned, balanced)",base+engineered (31),class_weight=balanced,214.62,0.638,0.5241,0.4211,0.7777,0.4694,0.03,0.4141,0.2767,0.6526
+E09,Random forest (tuned),base+engineered (31),none,189.05,0.8597,0.375,0.3826,0.7921,0.4782,0.0346,0.4356,0.0,0.1377
+E10,Sequential MLP baseline,base (25),none,52.4,0.8593,0.3869,0.3988,0.7924,0.4773,0.0371,0.43,0.0,0.1805
+E11,Sequential MLP regularised,base (25),none,195.26,0.8598,0.3827,0.3934,0.7955,0.4797,0.0376,0.4363,0.0,0.1648
+E12,"Sequential MLP regularised, lr 1e-2",base (25),none,62.51,0.8586,0.3633,0.3643,0.7887,0.4733,0.0338,0.4223,0.0,0.0979
+E13,"Sequential MLP regularised, lr 1e-4",base (25),none,411.31,0.86,0.3739,0.381,0.7959,0.4793,0.0361,0.4368,0.0,0.1333
+E14,"Sequential MLP regularised, batch 4096",base (25),none,246.06,0.8602,0.3758,0.3838,0.795,0.4794,0.0351,0.4383,0.0,0.1397
+E15,"Sequential MLP regularised, class-weighted",base (25),class weights (n/(k*n_c))^0.5,151.22,0.8322,0.4704,0.4551,0.7956,0.4782,0.0365,0.4333,0.0,0.5136
+E16,Functional wide-and-deep,base (25),none,187.89,0.8603,0.3855,0.3973,0.7958,0.4798,0.0363,0.4378,0.0,0.1742
+E17,Functional wide-and-deep + engineered,base+engineered (31),none,182.87,0.8599,0.3853,0.3969,0.7951,0.4799,0.0364,0.4384,0.0,0.1739

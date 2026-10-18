@@ -1,0 +1,8 @@
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\small\textbf{\textit{Abstract}---}Motivated by the large share of undiagnosed diabetes in rural sub-Saharan Africa, I compare traditional machine learning and deep learning for classifying self-reported diabetes status (no diabetes, prediabetes, diabetes) from 25 population health indicators in the 2015 CDC Behavioral Risk Factor Surveillance System. The codebook-verified data comprise 441,456 records, with 440,658 usable target labels. I ran 17 tracked experiments using a leakage-safe pipeline and TensorFlow/Keras Sequential and Functional models. On a held-out test set of 66,099 respondents, tuned gradient boosting (E07) achieved macro ROC-AUC 0.8011 and macro average precision 0.4792. The selected Functional wide-and-deep network with engineered features (E17) was close (0.8004 and 0.4779), while logistic regression reached 0.7942 and 0.4690. Diabetes was moderately ranked (E07 ROC-AUC 0.843), but prediabetes remained difficult to identify (average precision about 0.036). A validation-selected $F_2$ threshold of 0.117 raised diabetes sensitivity to 0.840, at the cost of flagging 38.1\% of respondents. Error and subgroup analyses highlight self-report limitations, reverse causation and uneven sensitivity. The models are research tools, not diagnostic systems.
+
+\smallskip
+\textbf{\textit{Index Terms}---}diabetes, BRFSS, class imbalance, gradient boosting, deep learning, population health, screening.
+\end{minipage}
+\end{center}

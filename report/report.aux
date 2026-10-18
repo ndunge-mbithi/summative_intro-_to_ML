@@ -1,0 +1,126 @@
+\relax 
+\providecommand\hyper@newdestlabel[2]{}
+\providecommand\HyField@AuxAddToFields[1]{}
+\providecommand\HyField@AuxAddToCoFields[2]{}
+\citation{idf2022}
+\citation{idfafrica2021}
+\citation{mohamed2018}
+\citation{mohamed2018}
+\citation{cdc2015data}
+\citation{cdc2015codebook}
+\citation{grinsztajn2022,shwartzziv2022}
+\citation{christodoulou2019}
+\citation{xie2019}
+\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{1}{section.1}\protected@file@percent }
+\newlabel{sec:intro}{{1}{1}{Introduction}{section.1}{}}
+\citation{majcherek2025}
+\citation{zafar2025}
+\citation{chowdhury2026}
+\citation{christodoulou2019}
+\citation{kopitar2020}
+\citation{grinsztajn2022}
+\citation{shwartzziv2022}
+\citation{friedman2001}
+\citation{breiman2001}
+\citation{cheng2016}
+\citation{saito2015}
+\citation{collins2024}
+\citation{strobl2007}
+\citation{lundberg2017}
+\citation{obermeyer2019}
+\citation{pierannunzi2013}
+\citation{xie2019}
+\citation{majcherek2025,zafar2025}
+\@writefile{toc}{\contentsline {section}{\numberline {2}Literature Review}{2}{section.2}\protected@file@percent }
+\newlabel{sec:lit}{{2}{2}{Literature Review}{section.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Classifying diabetes from survey data}{2}{subsection.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Simple models, complex models and tabular data}{2}{subsection.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Evaluating rare outcomes}{2}{subsection.2.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.4}Explanations, fairness and the quality of labels}{2}{subsection.2.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.5}The gap this project addresses}{2}{subsection.2.5}\protected@file@percent }
+\citation{cdc2015data}
+\citation{cdc2015codebook}
+\citation{cdc2015codebook}
+\citation{cdc2015codebook}
+\citation{pedregosa2011}
+\citation{saito2015}
+\citation{breiman2001}
+\citation{friedman2001}
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces \texttt  {DIABETE3} categories, observed counts (identical to the codebook~\cite  {cdc2015codebook}) and the 3-class target mapping.}}{3}{table.caption.1}\protected@file@percent }
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{tab:target}{{1}{3}{\texttt {DIABETE3} categories, observed counts (identical to the codebook~\cite {cdc2015codebook}) and the 3-class target mapping}{table.caption.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3}Methodology}{3}{section.3}\protected@file@percent }
+\newlabel{sec:method}{{3}{3}{Methodology}{section.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Data, provenance and target}{3}{subsection.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Choosing and recoding the predictors}{3}{subsection.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Preprocessing and feature engineering}{3}{subsection.3.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}Splitting and evaluation design}{3}{subsection.3.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.5}Traditional machine learning}{3}{subsection.3.5}\protected@file@percent }
+\citation{abadi2016}
+\citation{cheng2016}
+\citation{lundberg2017}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.6}Deep learning}{4}{subsection.3.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.7}Tracking, explanation and reproducibility}{4}{subsection.3.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4}Results}{4}{section.4}\protected@file@percent }
+\newlabel{sec:results}{{4}{4}{Results}{section.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Dataset and class distribution}{4}{subsection.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Validation experiments}{4}{subsection.4.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Held-out test evaluation}{4}{subsection.4.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}Screening threshold and error analysis}{4}{subsection.4.4}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Experiment results on the validation set (66,099 respondents; argmax decisions). Split: stratified 70/15/15, seed 42. B = 25 base features, B+E = base + 6 engineered; CW = class weighting. Time = training seconds on 2 CPU cores. Macro AP is the selection metric; the best value is in bold. Full hyper-parameters are in Appendix~\ref {app:configs} and \texttt  {reports/experiment\_log.jsonl}.}}{5}{table.caption.2}\protected@file@percent }
+\newlabel{tab:experiments}{{2}{5}{Experiment results on the validation set (66,099 respondents; argmax decisions). Split: stratified 70/15/15, seed 42. B = 25 base features, B+E = base + 6 engineered; CW = class weighting. Time = training seconds on 2 CPU cores. Macro AP is the selection metric; the best value is in bold. Full hyper-parameters are in Appendix~\ref {app:configs} and \texttt {reports/experiment\_log.jsonl}}{table.caption.2}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Final held-out test results (66,099 respondents) with validation-tuned decision weights. E01 = logistic regression, E07 = tuned gradient boosting, E17 = Functional wide-and-deep + engineered network. Best value per row in bold.}}{5}{table.caption.3}\protected@file@percent }
+\newlabel{tab:test}{{3}{5}{Final held-out test results (66,099 respondents) with validation-tuned decision weights. E01 = logistic regression, E07 = tuned gradient boosting, E17 = Functional wide-and-deep + engineered network. Best value per row in bold}{table.caption.3}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Binary screening view (diabetes vs.\ not) for tuned gradient boosting on the test set. The $F_2$ threshold was selected on validation.}}{5}{table.caption.4}\protected@file@percent }
+\newlabel{tab:screening}{{4}{5}{Binary screening view (diabetes vs.\ not) for tuned gradient boosting on the test set. The $F_2$ threshold was selected on validation}{table.caption.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.5}Explanations and subgroup results}{5}{subsection.4.5}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Test-set diabetes detection by subgroup (tuned gradient boosting, tuned decision weights). Race/ethnicity was not a model input. All subgroups have at least 163 diabetes cases.}}{5}{table.caption.5}\protected@file@percent }
+\newlabel{tab:subgroups}{{5}{5}{Test-set diabetes detection by subgroup (tuned gradient boosting, tuned decision weights). Race/ethnicity was not a model input. All subgroups have at least 163 diabetes cases}{table.caption.5}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Discussion}{6}{section.5}\protected@file@percent }
+\newlabel{sec:discussion}{{5}{6}{Discussion}{section.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Traditional models and deep learning}{6}{subsection.5.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Threshold choice and screening burden}{6}{subsection.5.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}Labels, explainability and equity}{6}{subsection.5.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.4}Implications for rural sub-Saharan Africa}{6}{subsection.5.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.5}Limitations and next work}{6}{subsection.5.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {6}Conclusion}{6}{section.6}\protected@file@percent }
+\newlabel{sec:conclusion}{{6}{6}{Conclusion}{section.6}{}}
+\bibcite{idf2022}{1}
+\bibcite{idfafrica2021}{2}
+\bibcite{mohamed2018}{3}
+\bibcite{cdc2015data}{4}
+\bibcite{cdc2015codebook}{5}
+\bibcite{grinsztajn2022}{6}
+\bibcite{shwartzziv2022}{7}
+\bibcite{christodoulou2019}{8}
+\bibcite{xie2019}{9}
+\bibcite{majcherek2025}{10}
+\bibcite{zafar2025}{11}
+\bibcite{chowdhury2026}{12}
+\bibcite{kopitar2020}{13}
+\bibcite{friedman2001}{14}
+\bibcite{breiman2001}{15}
+\bibcite{cheng2016}{16}
+\bibcite{saito2015}{17}
+\bibcite{collins2024}{18}
+\bibcite{strobl2007}{19}
+\bibcite{lundberg2017}{20}
+\bibcite{obermeyer2019}{21}
+\bibcite{pierannunzi2013}{22}
+\bibcite{pedregosa2011}{23}
+\bibcite{abadi2016}{24}
+\gdef \LT@i {\LT@entry 
+    {1}{26.2322pt}\LT@entry 
+    {1}{98.00037pt}\LT@entry 
+    {1}{219.41675pt}\LT@entry 
+    {1}{167.8885pt}}
+\@writefile{toc}{\contentsline {section}{\numberline {A}Experiment configurations}{8}{appendix.A}\protected@file@percent }
+\newlabel{app:configs}{{A}{8}{Experiment configurations}{appendix.A}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {B}Supplementary figures}{9}{appendix.B}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Left: class distribution, unweighted and survey-weighted. Right: percentage of missing values per feature after recoding special codes.}}{9}{figure.caption.6}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces BMI distribution by class, prevalence by age band, and prevalence by self-rated general health.}}{9}{figure.caption.7}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Diabetes prevalence by binary indicator (left) and Spearman correlations among features and the ordinal target (right).}}{9}{figure.caption.8}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Left: training vs.\ validation log-loss across boosting iterations for E07. Right: permutation importance (drop in validation macro AP) for E07.}}{10}{figure.caption.9}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Test-set confusion matrices for logistic regression (E01, left) and the wide-and-deep network (E17, right) with tuned decision weights.}}{10}{figure.caption.10}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {C}Reproducibility}{10}{appendix.C}\protected@file@percent }
+\gdef \@abspage@last{10}

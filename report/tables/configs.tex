@@ -1,0 +1,26 @@
+\begin{footnotesize}
+\begin{longtable}{@{}p{0.04\linewidth}p{0.17\linewidth}p{0.41\linewidth}p{0.32\linewidth}@{}}
+\toprule
+ID & Run ID & Hyper-parameters & Observation (after reading the results)\\
+\midrule
+\endhead
+E01 & \texttt{E01\_20261018T091453Z} & C=1.0, penalty=l2, solver=lbfgs, max\_iter=1000 & Reference model: converges in 36 iterations; 0... \\
+E02 & \texttt{E02\_20261018T091536Z} & C=1.0, penalty=l2, solver=lbfgs, max\_iter=200, scaling=False & Without scaling, L-BFGS hits its 200-iteration... \\
+E03 & \texttt{E03\_20261018T091544Z} & C=1.0, penalty=l2, solver=lbfgs, max\_iter=1000 & Balanced weights vs E01: diabetes recall 0.18-... \\
+E04 & \texttt{E04\_20261018T091741Z} & n\_estimators=150, max\_depth=None, min\_samples\_leaf=5, max\_features=sqrt & Fully grown trees (mean depth ~39, ~13k leaves... \\
+E05 & \texttt{E05\_20261018T091850Z} & learning\_rate=0.1, max\_iter=200, max\_leaf\_nodes=31, min\_samples\_leaf=20 & Boosting improves both macro AP and ROC-AUC ov... \\
+E06 & \texttt{E06\_20261018T092012Z} & learning\_rate=0.1, max\_iter=200, max\_leaf\_nodes=31, min\_samples\_leaf=20 & Engineered features add only +0.0004 macro AP ... \\
+E07 & \texttt{E07\_20261018T101102Z} & l2\_regularization=4.33792, learning\_rate=0.03629, max\_iter=587, max\_leaf\_nodes=16, min\_samples\_leaf=73 & Search picks the most regularised candidate (l... \\
+E08 & \texttt{E08\_20261018T101459Z} & l2\_regularization=4.33792, learning\_rate=0.03629, max\_iter=587, max\_leaf\_nodes=16, min\_samples\_leaf=73 & Balanced weights on E07 repeat the E03 pattern... \\
+E09 & \texttt{E09\_20261018T111953Z} & max\_depth=14, max\_features=0.1572, min\_samples\_leaf=6, n\_estimators=300 & Shallower forest (depth 14, ~16\% features per ... \\
+E10 & \texttt{E10\_20261018T112116Z} & layers=32, activation=relu, learning\_rate=0.001, dropout=0, l2=0, batch\_size=512, epochs\_run=15, best\_epoch=9, params=1763, optimizer=Adam, early\_stopping=val\_loss, patience 6 & 32-unit MLP early-stops at epoch 9 with a negl... \\
+E11 & \texttt{E11\_20261018T112440Z} & layers=128-64-32, batch\_norm=True, dropout=0.3, l2=0.0001, learning\_rate=0.001, batch\_size=512, epochs\_run=29, best\_epoch=23, params=17987, optimizer=Adam, early\_stopping=val\_loss, patience 6 & Deeper MLP with BN/dropout/L2: small gain over... \\
+E12 & \texttt{E12\_20261018T112544Z} & layers=128-64-32, batch\_norm=True, dropout=0.3, l2=0.0001, learning\_rate=0.01, batch\_size=512, epochs\_run=8, best\_epoch=2, params=17987, optimizer=Adam, early\_stopping=val\_loss, patience 6 & lr 1e-2 is unstable (best epoch 2, oscillating... \\
+E13 & \texttt{E13\_20261018T113237Z} & layers=128-64-32, batch\_norm=True, dropout=0.3, l2=0.0001, learning\_rate=0.0001, batch\_size=512, epochs\_run=60, best\_epoch=60, params=17987, optimizer=Adam, early\_stopping=val\_loss, patience 6 & lr 1e-4 is still improving at the 60-epoch cap... \\
+E14 & \texttt{E14\_20261018T113645Z} & layers=128-64-32, batch\_norm=True, dropout=0.3, l2=0.0001, learning\_rate=0.001, batch\_size=4096, epochs\_run=60, best\_epoch=58, params=17987, optimizer=Adam, early\_stopping=val\_loss, patience 6 & Batch 4096 needs 58 of 60 epochs to match E11:... \\
+E15 & \texttt{E15\_20261018T113917Z} & layers=128-64-32, batch\_norm=True, dropout=0.3, l2=0.0001, learning\_rate=0.001, batch\_size=512, epochs\_run=19, best\_epoch=13, params=17987, optimizer=Adam, early\_stopping=val\_loss, patience 6 & Softened class weights raise diabetes recall 0... \\
+E16 & \texttt{E16\_20261018T114316Z} & architecture=wide (linear) + deep 128-64, logits summed, dropout=0.3, l2=0.0001, learning\_rate=0.001, batch\_size=512, epochs\_run=29, best\_epoch=23, params=16031, optimizer=Adam, early\_stopping=val\_loss, patience 6 & Wide-and-deep is the best deep model: the line... \\
+E17 & \texttt{E17\_20261018T114620Z} & architecture=wide (linear) + deep 128-64, logits summed, dropout=0.3, l2=0.0001, learning\_rate=0.001, batch\_size=512, epochs\_run=29, best\_epoch=23, params=17603, optimizer=Adam, early\_stopping=val\_loss, patience 6 & Engineered features give no gain on E16, consi... \\
+\bottomrule
+\end{longtable}
+\end{footnotesize}
