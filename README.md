@@ -2,7 +2,7 @@
 
 **Traditional machine learning vs. deep learning on the CDC BRFSS 2015 survey**
 
-Author: Ogayo Andrew (BSc Software Engineering, African Leadership University)
+Author: Ndunge Mutheu Mbithi (BSc Software Engineering, African Leadership University)
 
 > **Scope.** This is a population-health screening research project. The models are not clinically validated diagnostic systems and must not be used to make individual medical decisions.
 
