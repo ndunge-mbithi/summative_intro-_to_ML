@@ -1,0 +1,25 @@
+\begin{table}[t]
+\centering\footnotesize
+\caption{Test-set diabetes detection by subgroup (tuned gradient boosting, tuned decision weights). Race/ethnicity was not a model input. All subgroups have at least 163 diabetes cases.}
+\label{tab:subgroups}
+\setlength{\tabcolsep}{3.5pt}
+\begin{tabular}{@{}llrcccc@{}}
+\toprule
+Dim. & Group & $n$ & Prev. & Recall & Prec. & AUC\\
+\midrule
+sex & Female & 37,957 & 0.124 & 0.486 & 0.417 & 0.846 \\
+sex & Male & 28,142 & 0.138 & 0.517 & 0.423 & 0.839 \\
+age & 45-64 & 25,676 & 0.131 & 0.485 & 0.418 & 0.832 \\
+age & 65+ & 22,944 & 0.205 & 0.544 & 0.421 & 0.767 \\
+age & 18-44 & 17,479 & 0.030 & 0.209 & 0.429 & 0.877 \\
+race/ethnicity & White NH & 50,483 & 0.121 & 0.494 & 0.404 & 0.840 \\
+race/ethnicity & Hispanic & 5,223 & 0.145 & 0.518 & 0.474 & 0.866 \\
+race/ethnicity & Black NH & 5,127 & 0.205 & 0.543 & 0.462 & 0.813 \\
+race/ethnicity & Other NH & 2,946 & 0.125 & 0.447 & 0.498 & 0.869 \\
+race/ethnicity & Multiracial NH & 1,241 & 0.131 & 0.540 & 0.440 & 0.870 \\
+income & \$50k+ & 26,238 & 0.090 & 0.370 & 0.413 & 0.856 \\
+income & \$20-50k & 18,562 & 0.152 & 0.532 & 0.421 & 0.825 \\
+income & <\$20k & 9,620 & 0.199 & 0.631 & 0.438 & 0.816 \\
+\bottomrule
+\end{tabular}
+\end{table}

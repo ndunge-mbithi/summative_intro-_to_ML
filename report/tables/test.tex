@@ -1,0 +1,23 @@
+\begin{table}[t]
+\centering\footnotesize
+\caption{Final held-out test results (66,099 respondents) with validation-tuned decision weights. E01 = logistic regression, E07 = tuned gradient boosting, E16 = Functional wide-and-deep network. Best value per row in bold.}
+\label{tab:test}
+\begin{tabular}{@{}lccc@{}}
+\toprule
+Metric & \textbf{E01} & \textbf{E07} & \textbf{E16}\\
+\midrule
+Accuracy & 0.805 & 0.823 & \textbf{0.824} \\
+Balanced accuracy & \textbf{0.480} & 0.478 & 0.475 \\
+Macro F1 & 0.462 & \textbf{0.468} & 0.466 \\
+Macro ROC-AUC & 0.794 & 0.800 & \textbf{0.800} \\
+Macro AP & 0.469 & \textbf{0.479} & 0.477 \\
+Recall, prediabetes & \textbf{0.072} & 0.047 & 0.042 \\
+Precision, prediabetes & 0.044 & \textbf{0.048} & 0.047 \\
+Recall, diabetes & \textbf{0.502} & 0.500 & 0.492 \\
+Precision, diabetes & 0.394 & \textbf{0.420} & 0.418 \\
+Macro F1 (survey-weighted) & 0.478 & \textbf{0.480} & 0.478 \\
+Macro ROC-AUC (survey-weighted) & 0.823 & \textbf{0.828} & 0.826 \\
+Recall, diabetes (survey-weighted) & 0.469 & \textbf{0.479} & 0.465 \\
+\bottomrule
+\end{tabular}
+\end{table}

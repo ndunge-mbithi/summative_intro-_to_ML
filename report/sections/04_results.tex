@@ -1,0 +1,71 @@
+\section{Results}
+\label{sec:results}
+
+\subsection{What the data look like}
+Of the 440,658 labelled respondents, 85.26\% reported no diabetes, 1.75\% prediabetes and 12.99\% diabetes. Survey weighting brings the diabetes share down to 10.5\%, matching the codebook estimate. Income was the answer most often missing (17.97\%), but its absence barely related to the outcome. Prevalence climbed steeply with age, from about 1\% at 18--29 to about 20\% at 70 and over, and with poorer self-rated health, from about 2\% to 36\%. Some strong associations reflected contact with health care rather than risk: respondents who had recently had their cholesterol checked were five times as likely to report diabetes (14.9\% versus 2.8\%).
+
+\input{tables/experiments}
+
+\subsection{How the experiments unfolded}
+Table~\ref{tab:experiments} and Fig.~\ref{fig:comparison} summarise all 17 experiments; Appendix~\ref{app:configs} gives each run's settings and my observation on it.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{fig07_model_comparison.png}
+\caption{Validation metrics for all 17 experiments (blue: traditional ML; red: deep learning). Axes are zoomed to the observed range; the dotted line marks the best value.}
+\label{fig:comparison}
+\end{figure}
+
+Logistic regression set the baseline at a validation macro AP of 0.4704 (E01). Removing standardisation (E02) left the model unchanged but made it hard to fit: the solver ran out of iterations, took about five times longer and finished worse on every metric. A forest of fully grown trees (E04), averaging 38.9 levels and about 12,955 leaves, nearly memorised its samples: it improved average precision (0.4780) but ranked slightly worse by ROC-AUC, a classic sign of high variance. Gradient boosting (E05) improved on both measures. Adding the engineered features (E06) moved macro AP by only 0.0004, a reminder that trees already build interactions such as age and BMI for themselves.
+
+Tuning was instructive in its own right. The boosting search preferred its most conservative candidate: a slow learning rate of 0.036 over 587 iterations, small 16-leaf trees and strong L2 regularisation. Its score on the training folds (0.625) stayed closest to its score on the held-out folds (0.475), while larger trees pushed training scores towards 0.80 without improving held-out performance at all. Refitted on the full training set (E07), this model achieved the best validation result of the study, a macro AP of 0.4814. The forest search likewise preferred shallow trees (E09), which lifted ROC-AUC from 0.7862 to 0.7921 without changing average precision.
+
+The networks told a similar story. The 32-unit network (E10) stopped at epoch 9 with almost no train--validation gap (macro AP 0.4772), and the deeper regularised network (E11) reached 0.4791. A learning rate of $10^{-2}$ (E12) made training unstable, peaking at epoch 2, while a rate of $10^{-4}$ (E13) or batches of 4096 (E14) only slowed learning to the same point. The wide-and-deep network (E16) was the best deep model, with a macro AP of 0.4799. The learning curves (Fig.~\ref{fig:curves}) show no overfitting: validation loss levels off rather than rising, and in the regularised networks training loss sits slightly above it because dropout only operates during training.
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{fig05_keras_learning_curves.png}
+\caption{Training and validation loss (top) and accuracy (bottom) for six Keras experiments. The dotted line marks the early-stopping epoch.}
+\label{fig:curves}
+\end{figure*}
+
+Class imbalance cut across every family. Choosing the most probable class, no model ever predicted prediabetes, and none found more than about a fifth of diabetes cases. Class weighting raised diabetes recall to 0.59 for logistic regression (E03) and 0.66 for boosting (E08), at the cost of accuracy near 0.64 and lower average precision; in the network (E15) it reached 0.50 with average precision unchanged. Weighting moved the decision boundary without improving the ranking.
+
+\subsection{The final test}
+I carried tuned boosting (E07) and the wide-and-deep network (E16) forward, with logistic regression (E01) as an interpretable reference. Tuning each model's class multipliers on validation (\{1, 15, 2.5\} for E07 and E16, \{1, 20, 3\} for E01) lifted validation macro-F1 from about 0.40 to 0.47. On the test set (Table~\ref{tab:test}), boosting and the network tied on macro ROC-AUC (0.8004 and 0.8005), boosting kept a small lead in average precision (0.4790 against 0.4775), and logistic regression followed about 0.01 behind; test scores tracked validation closely, so selection had not overfitted.
+
+\input{tables/test}
+
+The confusion matrix in Fig.~\ref{fig:cm} shows where the errors fall. Boosting found 4,296 of the 8,588 people with diabetes, and four in ten of its diabetes flags were correct. Most of the cases it missed (3,987) were labelled as having no diabetes, while 5,549 people without diabetes were flagged in the other direction. Prediabetes was hardly recognised: 54 of 1,154 cases were identified, with 714 assigned to no diabetes and 386 to diabetes. The ROC and precision--recall curves in Fig.~\ref{fig:rocpr} make the contrast between the two minority classes stark. Diabetes reached a ROC-AUC of 0.843 and an average precision of 0.434, more than three times its 13\% base rate. Prediabetes reached a respectable-looking ROC-AUC of 0.72, but its average precision of 0.036 barely cleared its 1.7\% base rate.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{fig08_confusion_E07.png}
+\caption{Test-set confusion matrices for tuned gradient boosting (E07) with tuned decision weights: counts (left) and row-normalised recall (right).}
+\label{fig:cm}
+\end{figure}
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=0.85\textwidth]{fig09_roc_pr_test.png}
+\caption{One-vs-rest ROC (top) and precision--recall (bottom) curves on the test set for the three final models. Grey lines show chance and class prevalence.}
+\label{fig:rocpr}
+\end{figure*}
+
+\input{tables/screening}
+
+\subsection{Screening, errors, explanations and subgroups}
+Viewed as a screening tool (Table~\ref{tab:screening}), the model's usefulness depends almost entirely on its threshold. At the default cut-off of 0.5, boosting caught only 16.8\% of diabetes cases. At the $F_2$ threshold of 0.112 chosen on validation, it caught 84.7\% and a negative result was right 96.7\% of the time, but it flagged 38.9\% of all respondents, and only 28.3\% of those flagged actually had diabetes. The cases it missed looked more like the general population than like the cases it found, with an average BMI of 28.8 against 34.4 for detected cases and fewer diagnosed conditions, while the false alarms came disproportionately from people with high-risk profiles.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.92\linewidth]{fig11_shap_diabetes.png}
+\caption{TreeSHAP values for the diabetes class (E07, 2,000 validation respondents). Colour shows the feature value; positive SHAP values push predictions towards diabetes.}
+\label{fig:shap}
+\end{figure}
+
+The explanation methods agreed on the core signals. Permutation importance put BMI first (shuffling it cost 0.0347 in macro AP), then self-rated health, age, hypertension and high cholesterol. SHAP (Fig.~\ref{fig:shap}) placed self-rated health first and credited the engineered comorbidity count and age-by-BMI interaction, and logistic regression gave odds ratios per standard deviation of 1.73 for poorer self-rated health, 1.56 for age and 1.50 for BMI. Some signals, though, ran in directions no causal account would predict. A recent check-up and a cholesterol test raised the predicted risk, while heavy drinking lowered it.
+
+\input{tables/subgroups}
+
+Finally, Table~\ref{tab:subgroups} shows similar performance for men and women but not across age and income. Among adults under 45 the model ranked best (ROC-AUC 0.877) yet caught only 20.9\% of cases, while among those 65 and over it caught 54.4\% but ranked worst (0.767). Recall rose from 0.370 in the highest income band to 0.631 in the lowest. Among racial and ethnic groups, Black non-Hispanic respondents had the highest prevalence (20.5\%) and the lowest ROC-AUC (0.813).
