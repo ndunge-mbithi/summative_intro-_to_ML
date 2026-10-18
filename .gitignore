@@ -1,0 +1,34 @@
+# Raw and derived healthcare data are never committed (download with scripts/download_data.py)
+data/raw/
+data/interim/
+*.XPT
+*.xpt
+*.zip
+*.parquet
+
+# Model artifacts are distributed via Google Drive, not Git
+models/*.joblib
+models/*.keras
+logs/keras/**/best.keras
+
+# Python / notebooks
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.pytest_cache/
+.venv/
+venv/
+
+# Secrets
+.env
+*.pem
+credentials*.json
+
+# OS
+.DS_Store
+
+# LaTeX build artefacts (the compiled PDF is kept in reports/report.pdf)
+report/*.aux
+report/*.log
+report/*.out
+report/report.pdf
