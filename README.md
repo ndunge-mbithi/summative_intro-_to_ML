@@ -157,8 +157,8 @@ proba = pipe.predict_proba(X)                     # columns: no diabetes, predia
 - The data are from 2015 and US adults only, so transfer to other periods or countries (e.g. East Africa) is untested.
 - Hyper-parameter searches used a 100k-row training subsample because of the CPU budget.
 
-## Links
+## Submission links
 
-- GitHub repository: _to be added once the repository is published_
-- Google Drive deliverables folder: _to be added once created_
-- Video presentation: _to be added once recorded_
+- GitHub repository: https://github.com/ndunge-mbithi/summative_intro-_to_ML
+- Google Drive deliverables: **pending — add the actual folder URL after uploading and checking access**
+- Video presentation: **pending — record, upload, and add the actual playable URL**

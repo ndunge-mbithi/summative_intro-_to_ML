@@ -1,0 +1,19 @@
+# Versions used to produce the reported results (Python 3.13, CPU-only).
+# On Google Colab, `tensorflow` (GPU build) can replace `tensorflow-cpu`.
+numpy==2.5.3
+pandas==3.0.5
+pyarrow==26.0.0
+scipy==1.18.1
+scikit-learn==1.9.1
+tensorflow-cpu==2.21.0
+keras==3.15.1
+tensorboard==2.21.0
+matplotlib==3.11.2
+seaborn==0.13.2
+shap==0.54.1
+joblib==1.6.0
+jupyter==1.1.1
+ipykernel==7.4.0
+nbformat==5.11.1
+nbconvert==7.17.2
+pytest==9.1.1
