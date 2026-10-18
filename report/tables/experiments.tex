@@ -1,0 +1,28 @@
+\begin{table*}[t]
+\centering\footnotesize
+\caption{Experiment results on the validation set (66,099 respondents; argmax decisions). Split: stratified 70/15/15, seed 42. B = 25 base features, B+E = base + 6 engineered; CW = class weighting. Time = training seconds on 2 CPU cores. Macro AP is the selection metric; the best value is in bold. Full hyper-parameters are in Appendix~\ref{app:configs} and \texttt{reports/experiment\_log.jsonl}.}
+\label{tab:experiments}
+\begin{tabular}{@{}llccrcccccc@{}}
+\toprule
+ID & Model & Feat. & Imb. & Time (s) & Acc. & Macro F1 & Macro ROC-AUC & Macro AP & Rec.\ pre. & Rec.\ dia.\\
+\midrule
+E01 & LR baseline & B & -- & 5 & 0.858 & 0.397 & 0.7887 & 0.4704 & 0.00 & 0.18 \\
+E02 & LR unscaled & B & -- & 26 & 0.856 & 0.389 & 0.7694 & 0.4632 & 0.00 & 0.16 \\
+E03 & LR balanced & B & CW & 5 & 0.645 & 0.423 & 0.7783 & 0.4657 & 0.31 & 0.59 \\
+E04 & RF baseline & B & -- & 26 & 0.860 & 0.385 & 0.7862 & 0.4780 & 0.00 & 0.14 \\
+E05 & GB baseline & B & -- & 26 & 0.860 & 0.406 & 0.7918 & 0.4794 & 0.00 & 0.20 \\
+E06 & GB + engineered & B+E & -- & 33 & 0.861 & 0.406 & 0.7922 & 0.4798 & 0.00 & 0.20 \\
+E07 & GB tuned & B+E & -- & 84 & 0.861 & 0.406 & 0.7953 & \textbf{0.4814} & 0.00 & 0.20 \\
+E08 & GB tuned, balanced & B+E & CW & 84 & 0.638 & 0.422 & 0.7771 & 0.4687 & 0.28 & 0.66 \\
+E09 & RF tuned & B+E & -- & 53 & 0.860 & 0.383 & 0.7921 & 0.4782 & 0.00 & 0.14 \\
+E10 & MLP 32 (Seq.) & B & -- & 28 & 0.859 & 0.398 & 0.7927 & 0.4772 & 0.00 & 0.18 \\
+E11 & MLP 128-64-32 reg. (Seq.) & B & -- & 112 & 0.860 & 0.390 & 0.7956 & 0.4791 & 0.00 & 0.16 \\
+E12 & E11, lr $10^{-2}$ & B & -- & 33 & 0.858 & 0.359 & 0.7893 & 0.4728 & 0.00 & 0.09 \\
+E13 & E11, lr $10^{-4}$ & B & -- & 216 & 0.860 & 0.381 & 0.7958 & 0.4793 & 0.00 & 0.13 \\
+E14 & E11, batch 4096 & B & -- & 130 & 0.860 & 0.381 & 0.7949 & 0.4791 & 0.00 & 0.13 \\
+E15 & E11, class-weighted & B & CW & 78 & 0.834 & 0.454 & 0.7959 & 0.4785 & 0.00 & 0.50 \\
+E16 & Wide-and-deep (Func.) & B & -- & 106 & 0.860 & 0.399 & 0.7956 & 0.4799 & 0.00 & 0.18 \\
+E17 & E16 + engineered & B+E & -- & 104 & 0.860 & 0.396 & 0.7950 & 0.4797 & 0.00 & 0.17 \\
+\bottomrule
+\end{tabular}
+\end{table*}

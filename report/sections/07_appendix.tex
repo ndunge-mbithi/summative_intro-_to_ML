@@ -1,0 +1,43 @@
+\section{Experiment configurations}
+\label{app:configs}
+Every row below corresponds to a run in \texttt{reports/experiment\_log.jsonl} and a TensorBoard directory \texttt{logs/tensorboard/<run ID>}. All runs used the same stratified 70/15/15 split (seed 42). Traditional models used median imputation with missing-value indicators, 0.1/99.9\% winsorising of continuous variables and one-hot encoded smoking status; logistic regression (except E02) and all networks were also standardised. Run IDs are from the final reported execution.
+
+\input{tables/configs}
+
+\section{Supplementary figures}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.48\linewidth]{fig01_target_distribution.png}\hfill
+\includegraphics[width=0.48\linewidth]{fig02_missingness.png}
+\caption{Left: class distribution, unweighted and survey-weighted. Right: percentage of missing values per feature after recoding special codes.}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth]{fig03_distributions.png}
+\caption{BMI distribution by class, prevalence by age band, and prevalence by self-rated general health.}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth]{fig04_associations.png}
+\caption{Diabetes prevalence by binary indicator (left) and Spearman correlations among features and the ordinal target (right).}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.48\linewidth]{fig06_boosting_learning_curve.png}\hfill
+\includegraphics[width=0.48\linewidth]{fig10_permutation_importance.png}
+\caption{Left: training vs.\ validation log-loss across boosting iterations for E07. Right: permutation importance (drop in validation macro AP) for E07.}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.49\linewidth]{fig08_confusion_E01.png}\hfill
+\includegraphics[width=0.49\linewidth]{fig08_confusion_E16.png}
+\caption{Test-set confusion matrices for logistic regression (E01, left) and the wide-and-deep network (E16, right) with tuned decision weights.}
+\end{figure}
+
+\section{Reproducibility}
+The environment (Python 3.13, scikit-learn 1.9.1, TensorFlow 2.21, Keras 3.15, SHAP 0.54) is pinned in \texttt{requirements.txt} and recorded in \texttt{reports/environment.json}. The SHA-256 of the data file used is \texttt{bfe9e629\ldots ad300b1b9}. Saved artifacts (full scikit-learn pipeline, Keras model with its preprocessor, and metadata containing decision weights and the screening threshold) were reloaded and reproduced the in-memory predictions exactly.

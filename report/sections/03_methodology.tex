@@ -1,0 +1,35 @@
+\section{Methodology}
+\label{sec:method}
+
+\subsection{Data, provenance and target}
+I worked with the 2015 BRFSS combined landline and cell-phone public-use file~\cite{cdc2015data}, which holds 441,456 interviews with non-institutionalised US adults across 330 variables. My sandboxed environment could not reach the CDC website, so I took a copy of \texttt{LLCP2015.XPT} from a public research repository. Because it came from a mirror, the loader checks its record count, variable count and every target category against the official codebook~\cite{cdc2015codebook} and refuses to continue on any mismatch. Every count matched exactly (Table~\ref{tab:target}); in Colab the same loader downloads the file from the CDC.
+
+The target, \texttt{DIABETE3}, records the answer to ``(Ever told) you have diabetes''. I grouped its answers into three classes: no diabetes (codes 3 and 2), prediabetes (code 4) and diabetes (code 1). Code 2, diabetes only during pregnancy, describes a past condition, so following CDC's convention I counted it as no diabetes. Removing the 798 ``don't know'', ``refused'' and blank answers left 440,658 respondents. I kept prediabetes separate, since merging it with diabetes would change the outcome's meaning and hide the hardest part of the problem.
+
+\input{tables/target}
+
+\subsection{Choosing and recoding the predictors}
+I chose 25 core-questionnaire predictors linked to diabetes in the literature, covering cardiometabolic and general health, behaviour and BMI, and demographics and access to care (the full list is in the repository). I left out the optional diabetes modules, whose questions, such as insulin use, are only asked of people who already report diabetes and would leak the answer into the inputs. Race and ethnicity were kept aside for checking performance across groups and never used as model inputs.
+
+Every recode follows the codebook and is unit-tested: ``don't know'' and ``refused'' codes became missing values rather than numbers, 88 (``no days'') became zero, and BMI was rescaled from its implied decimals. The cholesterol question needed more thought. It is only asked of people who have been tested, so 49,673 never-tested respondents appear blank, yet someone never tested has, by definition, never been told their cholesterol is high. I coded them as ``not told'' rather than discarding them.
+
+\subsection{Preprocessing and feature engineering}
+Each respondent is their own primary sampling unit, so there are no duplicate people or clusters for a random split to cut through. All preprocessing lives inside scikit-learn pipelines~\cite{pedregosa2011}, so every statistic it uses is learned from the training split alone. Missing numeric values were filled with the training median, and a binary indicator was added for each feature that had gaps, so a model could still use the fact that an answer was missing. Continuous variables were capped at their training 0.1st and 99.9th percentiles. That limits the leverage of implausible BMI values without deleting the people who reported them. Smoking status was one-hot encoded with an explicit ``missing'' category. I standardised features for logistic regression and the neural networks, whose gradient-based training is sensitive to scale, but not for the tree ensembles, which are unaffected by it.
+
+I also engineered six features from domain knowledge: a WHO BMI category, a count of diagnosed cardiometabolic conditions, a lifestyle-risk score, combined unhealthy days capped at 30, an age-by-BMI interaction and a flag for barriers to care. The transformer that builds them learns nothing from the data, so it cannot leak information between splits.
+
+\subsection{Splitting and evaluation design}
+A stratified 70/15/15 split gave 308,460 training, 66,099 validation and 66,099 test respondents. Validation data were used to compare experiments, stop network training and tune decision rules; the test set was opened once, at the end. Searches used three-fold cross-validation on a 100,000-row training sample, a compromise forced by my two-core CPU, and I also report survey-weighted test metrics as a rough population check.
+
+With only 1.7\% of respondents in the prediabetes class, accuracy says almost nothing, so I selected models on macro average precision, which averages the area under each class's precision--recall curve so that every class counts equally~\cite{saito2015}. Because the models almost never chose a minority class as most probable, I tuned per-class probability multipliers on validation to maximise macro-F1, the three-class equivalent of moving a threshold. For a binary screening view I chose the diabetes cut-off maximising $F_2$, which values recall twice as much as precision.
+
+\subsection{Traditional machine learning}
+The traditional models were L2-penalised multinomial logistic regression, random forests~\cite{breiman2001} and gradient boosting~\cite{friedman2001}, using scikit-learn's histogram-based implementation so that boosting on 308,460 rows was feasible on a CPU; kernel SVMs, whose cost grows faster than linearly with sample size, were left out. The boosting search drew 16 candidates over learning rate, iterations, tree size, leaf size and L2 regularisation, and the forest search 10 candidates over depth, leaf size and features per split (the ranges are listed in the notebook, Section 8.3).
+
+\subsection{Deep learning}
+The neural networks were written in TensorFlow/Keras~\cite{abadi2016} and fed through \texttt{tf.data} pipelines. The training pipeline is cached, reshuffled every epoch, batched and prefetched, while validation and test pipelines keep a fixed order. Every network ends in a three-way softmax, trained with cross-entropy and Adam for up to 60 epochs, with early stopping after six epochs without improvement, checkpointing and TensorBoard logging.
+
+I began with a Sequential network with one 32-unit hidden layer, to see whether any non-linearity helped, then a deeper one (128, 64 and 32 units with batch normalisation, 30\% dropout and L2 decay of $10^{-4}$). From there I changed one thing at a time: learning rate ($10^{-2}$, $10^{-3}$, $10^{-4}$), batch size (512 or 4096) and softened class weights. For the Functional API I built a wide-and-deep network~\cite{cheng2016}, in which a linear branch, equivalent to logistic regression, and a regularised deep branch read the same inputs and are added before the softmax. I chose it because logistic regression had already captured most of the signal, so the deep branch only needs to learn what is left over.
+
+\subsection{Tracking, explanation and reproducibility}
+Every run was recorded with its own identifier and timestamp in a JSON log, a CSV results table and TensorBoard. All random seeds were fixed and TensorFlow's deterministic operations enabled, and running the whole notebook three times from scratch produced identical results. Explanations came from permutation importance, TreeSHAP~\cite{lundberg2017} and standardised logistic regression coefficients, and test performance was broken down by sex, age, race and ethnicity, and income. Everything ran on a two-core CPU with 8.4\,GB of RAM.
