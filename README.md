@@ -159,5 +159,5 @@ proba = pipe.predict_proba(X)                     # columns: no diabetes, predia
 ## Submission links
 
 - GitHub repository: https://github.com/ndunge-mbithi/summative_intro-_to_ML
-- Google Drive deliverables: **pending — add the actual folder URL after uploading and checking access**
-- Video presentation: **pending — record, upload, and add the actual playable URL**
+- Google Drive deliverables: https://drive.google.com/drive/folders/1YSHc8cdrZZEnFwYXGXNZOgtYSNCBCs9L?usp=sharing
+- Video presentation: 
